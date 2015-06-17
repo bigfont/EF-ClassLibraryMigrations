@@ -21,17 +21,19 @@ namespace DataLayer
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var connString = this.Configuration["ConnectionStrings:MyDbContext"];
+            var connString = Config["ConnectionStrings:MyDbContext"];
             optionsBuilder.UseSqlServer(connString);
         }
 
-        public IConfiguration Configuration { get; set; }
+        public IConfiguration Config { get; set; }
 
         public MyDbContext()
         {
-            var configuration = new Configuration();
-            configuration.AddJsonFile("config.json");
-            this.Configuration = configuration;
+            var config = new Configuration()
+                .AddJsonFile("config.json")
+                .AddEnvironmentVariables();
+
+            Config = config;
         }
     }
 }

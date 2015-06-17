@@ -14,6 +14,8 @@ namespace WebApp
 {
     public class Startup
     {
+        public IConfiguration Config { get; set; }
+
         public Startup(IHostingEnvironment env)
         {
             var config = new Configuration()
@@ -23,8 +25,6 @@ namespace WebApp
 
             Config = config;
         }
-
-        public IConfiguration Config { get; set; }
 
         public void ConfigureServices(IServiceCollection services)
         {
